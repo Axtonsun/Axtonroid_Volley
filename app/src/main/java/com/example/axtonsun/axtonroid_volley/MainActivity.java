@@ -1,27 +1,18 @@
 package com.example.axtonsun.axtonroid_volley;
 
-import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ImageView;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.NetworkImageView;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -71,20 +62,19 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         */
-        /*JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(" https://api.heweather.com/x3/citylist?search=hotworld&key=12b73649776046a395e43612b15d1f3a",
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(" https://api.heweather.com/x3/citylist?search=allchina&key=12b73649776046a395e43612b15d1f3a",
                 null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
-                Log.d("TGA",jsonObject.toString());
+                Log.d("TAG",jsonObject.toString());
             }
         },new Response.ErrorListener(){
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                Log.e("TAG",volleyError.getMessage(),volleyError);
+                Log.e("TAG11",volleyError.getMessage(),volleyError);
             }
         });
         mQueue.add(jsonObjectRequest);
-*/
         /**
          * 1.图片URL地址
          * 2.图片请求成功的回调
@@ -124,10 +114,28 @@ public class MainActivity extends AppCompatActivity {
         //ImageLoader.ImageListener listener = ImageLoader.getImageListener(imageView,R.mipmap.ic_launcher,R.mipmap.ic_launcher);
         //imageLoader.get("https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png",listener,200,200);
 
-        ImageLoader imageLoader = new ImageLoader(mQueue,new BitmapCache());
+     /*   ImageLoader imageLoader = new ImageLoader(mQueue,new BitmapCache());
         NetworkImageView networkImageView = (NetworkImageView)findViewById(R.id.network_image_view);
         networkImageView.setDefaultImageResId(R.mipmap.ic_launcher);
         networkImageView.setErrorImageResId(R.mipmap.ic_launcher);
-        networkImageView.setImageUrl("https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png",imageLoader);
+        networkImageView.setImageUrl("https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png",imageLoader);*/
+
+     /*   GsonRequest<Weather> gsonRequest = new GsonRequest<Weather>(
+                "http://www.weather.com.cn/data/sk/101010100.html", Weather.class,
+                new Response.Listener<Weather>() {
+                    @Override
+                    public void onResponse(Weather weather) {
+                        WeatherInfo weatherInfo = weather.getWeatherinfo();
+                        Log.d("TAG", "city is " + weatherInfo.getCity());
+                        Log.d("TAG", "temp is " + weatherInfo.getTemp());
+                        Log.d("TAG", "time is " + weatherInfo.getTime());
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Log.d("TAG", "onErrorResponse: ");
+            }
+        });
+        mQueue.add(gsonRequest);*/
     }
 }
